@@ -52,7 +52,7 @@ public class SkinGenerator : MonoBehaviour
         {
         }
 
-        public void Write(VertexData[] vertexData)
+        public void WriteVertexData(VertexData[] vertexData)
         {
             vertices.AddRange(vertexData);
         }

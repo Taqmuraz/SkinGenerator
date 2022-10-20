@@ -55,7 +55,7 @@ public sealed class MeshDataStream : IMeshDataStream
         this.joints.AddRange(joints);
     }
 
-    public void Write(VertexData[] vertexData)
+    public void WriteVertexData(VertexData[] vertexData)
     {
         buffer.AddRange(vertexData);
     }

@@ -298,11 +298,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247101413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.071999945, z: 0.020000001}
+  m_LocalPosition: {x: 0, y: 0.086, z: 0.020000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 346655438}
+  m_Children: []
   m_Father: {fileID: 594241865}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -315,63 +314,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 247101413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
+  m_Script: {fileID: 11500000, guid: e5f659ca28fc2be4bac1ce0fe1d82733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nodeWidth: 0.12
-  nodeDepth: 0.15
-  differentEnd: 0
-  endWidth: 0.05
-  endDepth: 0.05
---- !u!1 &346655437
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 346655438}
-  - component: {fileID: 346655439}
-  m_Layer: 0
-  m_Name: HeadEnd
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &346655438
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 346655437}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.157, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 247101414}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &346655439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 346655437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeWidth: 0.12
-  nodeDepth: 0.15
-  differentEnd: 0
-  endWidth: 0.05
-  endDepth: 0.05
+  size: {x: 0.03, y: 0.03, z: 0.03}
+  rotation: {x: 0, y: 180, z: 0}
+  offset: {x: 0, y: -0.04, z: 0}
 --- !u!1 &363539498
 GameObject:
   m_ObjectHideFlags: 0

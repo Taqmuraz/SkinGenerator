@@ -49,8 +49,8 @@ public sealed class SkinNodeFrustumGenerator : ISkinNodeGenerator
             MoveIndices(localIndices, startIndex);
             MoveIndices(endLocalIndices, startIndex);
 
-            meshDataStream.Write(CreateVertices(position, rotation, startSize));
-            meshDataStream.Write(CreateVertices(endPosition, rotation, endSize));
+            meshDataStream.WriteVertexData(CreateVertices(position, rotation, startSize));
+            meshDataStream.WriteVertexData(CreateVertices(endPosition, rotation, endSize));
             meshDataStream.WriteIndices(beginLocalIndices);
             meshDataStream.WriteIndices(localIndices);
             meshDataStream.WriteIndices(endLocalIndices);
