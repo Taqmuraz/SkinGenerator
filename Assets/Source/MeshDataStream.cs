@@ -19,6 +19,23 @@ public sealed class MeshDataStream : IMeshDataStream
         mesh.normals = normals;
         mesh.uv = uvs;
         mesh.name = "GeneratedMesh";
+
+        mesh.subMeshCount = indices.Count;
+
+        for (int i = 0; i < indices.Count; i++)
+        {
+            mesh.SetTriangles(indices[i].ToArray(), i);
+        }
+        var resultMesh = new Mesh();
+        resultMesh.CombineMeshes(Enumerable.Range(0, mesh.subMeshCount).Select(i => new CombineInstance()
+        {
+            mesh = mesh,
+            transform = Matrix4x4.identity,
+            subMeshIndex = i,
+        }).ToArray(), true);
+
+        mesh = resultMesh;
+
         mesh.bindposes = this.joints.Select(j => Matrix4x4.Inverse(j.Matrix)).ToArray();
         mesh.boneWeights = Enumerable.Range(0, buffer.Count).Select(i =>
         {
@@ -38,13 +55,6 @@ public sealed class MeshDataStream : IMeshDataStream
                 boneIndex3 = -1,
             };
         }).ToArray();
-
-        mesh.subMeshCount = indices.Count;
-
-        for (int i = 0; i < indices.Count; i++)
-        {
-            mesh.SetTriangles(indices[i].ToArray(), i);
-        }
 
         mesh.RecalculateBounds();
         mesh.RecalculateNormals();
