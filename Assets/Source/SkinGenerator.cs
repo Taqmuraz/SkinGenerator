@@ -28,9 +28,11 @@ public class SkinGenerator : MonoBehaviour
         renderer.bones = joints.Select(j => j.transform).ToArray();
         renderer.sharedMesh = lastGeneratedMesh;
         renderer.rootBone = rootNode.transform;
+        renderer.material = material;
+        renderer.localBounds = lastGeneratedMesh.bounds;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (lastGeneratedMesh != null)
         {

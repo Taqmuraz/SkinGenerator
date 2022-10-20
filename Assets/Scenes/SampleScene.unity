@@ -216,6 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rootNode: {fileID: 1748660402}
   targetObject: {fileID: 572482377}
+  material: {fileID: 2100000, guid: b8c56977b566e664f90e4fdea738b07c, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
