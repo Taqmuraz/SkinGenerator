@@ -68,8 +68,9 @@ public sealed class MeshDataStream : IMeshDataStream
         this.indices[this.indices.Count - 1].AddRange(indices);
     }
 
-    public void PushIndexBuffer()
+    public void PushIndexBuffer(out int lastIndex)
     {
+        lastIndex = buffer.Count;
         indices.Add(new List<int>());
     }
 }

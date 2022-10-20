@@ -3,16 +3,13 @@ using System.Linq;
 using UnityEngine;
 
 [ExecuteInEditMode]
-public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
+public abstract class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
 {
-    [SerializeField] float nodeWidth = 0.05f;
-    [SerializeField] float nodeDepth = 0.05f;
-    [SerializeField] bool nonDrawable;
-    [SerializeField] int siblingIndex;
     int index;
     SkinNodeTemplate[] childTemplates;
     int transformChildren;
     SkinNodeTemplate parent;
+    public IEnumerable<ISkinJoint> Children => childTemplates;
 
     public void TraceIndices(List<SkinNodeTemplate> jointsList, SkinNodeTemplate parent)
     {
@@ -54,34 +51,12 @@ public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
             transformChildren = transform.childCount;
         }
     }
-    public void AppendMeshData(ISkinNodeDataStream skinStream)
-    {
-        foreach (var child in childTemplates)
-        {
-            if (!nonDrawable)
-            {
-                Quaternion rotation = transform.rotation;
-                GenerateNode(skinStream, index, transform.position, rotation);
-                child.GenerateNode(skinStream, index, child.transform.position, rotation);
-                skinStream.PushBuffer();
-            }
 
-            child.AppendMeshData(skinStream);
-        }
-    }
-    void GenerateNode(ISkinNodeDataStream stream, int ownerIndex, Vector3 position, Quaternion rotation)
-    {
-        float halfWidth = nodeWidth * 0.5f;
-        float halfDepth = nodeDepth * 0.5f;
+    protected abstract ISkinNodeGenerator CreateGenerator();
 
-        Vector3[] localVertices = new Vector3[]
-        {
-            new Vector3(-halfWidth, 0f, -halfDepth),
-            new Vector3(-halfWidth, 0f, halfDepth),
-            new Vector3(halfWidth, 0f, halfDepth),
-            new Vector3(halfWidth, 0f, -halfDepth),
-        };
-        stream.Write(new SkinNodeData(ownerIndex, localVertices.Select(l => Matrix4x4.TRS(position, rotation, Vector3.one).MultiplyPoint3x4(l)).ToArray()));
+    public void AppendMeshData(IMeshDataStream stream)
+    {
+        CreateGenerator().Generate(stream, this);
     }
 
     public Matrix4x4 Matrix => transform.localToWorldMatrix;

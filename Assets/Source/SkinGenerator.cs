@@ -23,37 +23,66 @@ public class SkinGenerator : MonoBehaviour
     [ContextMenu("Generate skin")]
     void GenerateSkin()
     {
-        List<SkinNodeTemplate> joints = new List<SkinNodeTemplate>();
-        rootNode.TraceIndices(joints, null);
-        var skinStream = new SkinNodeDataStream();
-        rootNode.AppendMeshData(skinStream);
+        List<SkinNodeTemplate> nodes = new List<SkinNodeTemplate>();
+        rootNode.TraceIndices(nodes, null);
         var meshStream = new MeshDataStream();
-        skinStream.BuildSkin(meshStream, joints.ToArray());
+        meshStream.PushJoints(nodes.ToArray());
+        foreach (var node in nodes)
+        {
+            node.AppendMeshData(meshStream);
+        }
         lastGeneratedMesh = meshStream.BuildMesh();
 
         var renderer = targetObject.GetComponent<SkinnedMeshRenderer>();
         if(renderer == null) renderer = targetObject.AddComponent<SkinnedMeshRenderer>();
 
-        renderer.bones = joints.Select(j => j.transform).ToArray();
+        renderer.bones = nodes.Select(j => j.transform).ToArray();
         renderer.sharedMesh = lastGeneratedMesh;
         renderer.rootBone = rootNode.transform;
         renderer.materials = Enumerable.Repeat(material, lastGeneratedMesh.subMeshCount).ToArray();
         renderer.localBounds = lastGeneratedMesh.bounds;
     }
 
-    sealed class GizmosDrawSkinStream : ISkinNodeDataStream
+    sealed class GizmosDrawSkinStream : IMeshDataStream
     {
-        public void Write(SkinNodeData skinNodeData)
+        List<VertexData> vertices = new List<VertexData>();
+        List<List<int>> indices = new List<List<int>>();
+
+        public void PushJoints(ISkinJoint[] joints)
         {
-            var vertices = skinNodeData.Vertices;
-            Gizmos.DrawLine(vertices[0], vertices[1]);
-            Gizmos.DrawLine(vertices[1], vertices[2]);
-            Gizmos.DrawLine(vertices[2], vertices[3]);
-            Gizmos.DrawLine(vertices[3], vertices[0]);
         }
 
-        public void PushBuffer()
+        public void Write(VertexData[] vertexData)
         {
+            vertices.AddRange(vertexData);
+        }
+
+        public void WriteIndices(int[] indices)
+        {
+            this.indices.Last().AddRange(indices);
+        }
+
+        public void PushIndexBuffer(out int lastIndex)
+        {
+            lastIndex = vertices.Count;
+            indices.Add(new List<int>());
+        }
+
+        public void Draw()
+        {
+            foreach (var submesh in indices)
+            {
+                for (int i = 0; i < submesh.Count; i+=3)
+                {
+                    Vector3 p0 = vertices[submesh[i]].Position;
+                    Vector3 p1 = vertices[submesh[i + 1]].Position;
+                    Vector3 p2 = vertices[submesh[i + 2]].Position;
+
+                    Gizmos.DrawLine(p0, p1);
+                    Gizmos.DrawLine(p0, p2);
+                    Gizmos.DrawLine(p2, p1);
+                }
+            }
         }
     }
 
@@ -63,9 +92,14 @@ public class SkinGenerator : MonoBehaviour
 
         if (rootNode != null)
         {
+            var nodes = new List<SkinNodeTemplate>();
+            rootNode.TraceIndices(nodes, null);
             var stream = new GizmosDrawSkinStream();
             Gizmos.color = Color.yellow;
-            rootNode.AppendMeshData(stream);
+
+            foreach (var node in nodes) node.AppendMeshData(stream);
+
+            stream.Draw();
         }
         if (lastGeneratedMesh != null)
         {
