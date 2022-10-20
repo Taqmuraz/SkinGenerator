@@ -24,7 +24,7 @@ public class SkinGenerator : MonoBehaviour
     void GenerateSkin()
     {
         List<SkinNodeTemplate> joints = new List<SkinNodeTemplate>();
-        rootNode.TraceIndices(joints);
+        rootNode.TraceIndices(joints, null);
         var skinStream = new SkinNodeDataStream();
         rootNode.AppendMeshData(skinStream);
         var meshStream = new MeshDataStream();

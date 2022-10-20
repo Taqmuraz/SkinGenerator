@@ -6,15 +6,24 @@ using UnityEngine;
 public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
 {
     [SerializeField] float nodeWidth = 0.05f;
+    [SerializeField] bool connectWithChildren;
     int index;
     SkinNodeTemplate[] childTemplates;
     int transformChildren;
+    SkinNodeTemplate parent;
 
-    public void TraceIndices(List<SkinNodeTemplate> jointsList)
+    public void TraceIndices(List<SkinNodeTemplate> jointsList, SkinNodeTemplate parent)
     {
+        this.parent = parent;
         index = jointsList.Count;
         jointsList.Add(this);
-        foreach (var child in childTemplates) child.TraceIndices(jointsList);
+        foreach (var child in childTemplates) child.TraceIndices(jointsList, this);
+    }
+    void TraceTransform(Transform transform, List<SkinNodeTemplate> templates)
+    {
+        var template = transform.GetComponent<SkinNodeTemplate>();
+        if (template != null) templates.Add(template);
+        else foreach (Transform child in transform) TraceTransform(child, templates);
     }
 
     [ContextMenu("Reset template")]
@@ -29,7 +38,9 @@ public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
     }
     void RebindChildren()
     {
-        childTemplates = transform.Cast<Transform>().Select(t => t.GetComponent<SkinNodeTemplate>()).Where(t => t != null).ToArray();
+        var traceList = new List<SkinNodeTemplate>();
+        foreach (Transform child in transform) TraceTransform(child, traceList);
+        childTemplates = traceList.ToArray();
     }
 
     void Update()
@@ -54,13 +65,13 @@ public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
 
     public void AppendMeshData(ISkinNodeDataStream skinStream)
     {
+        if (connectWithChildren || childTemplates.Length <= 1) GenerateNode(skinStream);
+
         switch (childTemplates.Length)
         {
             case 0:
-                GenerateNode(skinStream);
                 return;
             case 1:
-                GenerateNode(skinStream);
                 var singleChild = childTemplates[0];
                 singleChild.AppendMeshData(skinStream);
                 break;
@@ -68,7 +79,7 @@ public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
                 foreach (var child in childTemplates)
                 {
                     skinStream.PushBuffer();
-                    GenerateNode(skinStream);
+                    if (connectWithChildren) GenerateNode(skinStream);
                     child.AppendMeshData(skinStream);
                 }
                 break;
@@ -80,17 +91,6 @@ public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
 
         float halfWidth = nodeWidth * 0.5f;
 
-        Quaternion localRotation;
-        Vector3 delta = transform.localPosition;
-
-        foreach (var child in childTemplates)
-        {
-            delta += child.transform.localPosition;
-        }
-        delta.Normalize();
-
-        localRotation = Quaternion.FromToRotation(Vector3.up, delta);
-
         Vector3[] localVertices = new Vector3[]
         {
             new Vector3(-halfWidth, 0f, -halfWidth),
@@ -99,9 +99,11 @@ public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
             new Vector3(halfWidth, 0f, -halfWidth),
         };
 
-        stream.Write(new SkinNodeData(index, localVertices.Select(l => Matrix.MultiplyPoint3x4(localRotation * l)).ToArray()));
+        stream.Write(new SkinNodeData(index, ParentIndex, localVertices.Select(l => Matrix.MultiplyPoint3x4(l)).ToArray()));
     }
 
     public Matrix4x4 Matrix => transform.localToWorldMatrix;
     public int Index => index;
+
+    public int ParentIndex => parent == null ? -1 : parent.index;
 }

@@ -32,6 +32,16 @@ public sealed class SkinNodeDataStream : ISkinNodeDataStream
             1, 2, 6,
             6, 5, 1
         };
+        int[] beginLocalIndices =
+        {
+            0, 3, 2,
+            2, 1, 0
+        };
+        int[] endLocalIndices =
+        {
+            7, 4, 5,
+            5, 6, 7
+        };
         int expectedVerticesCount = 4;
         int globalIndex = 0;
 
@@ -40,6 +50,7 @@ public sealed class SkinNodeDataStream : ISkinNodeDataStream
             if (subSkin.Count == 0) continue;
 
             stream.PushIndexBuffer();
+            stream.WriteIndices(beginLocalIndices.Select(l => l + globalIndex).ToArray());
 
             int nodeNumber = 0;
 
@@ -54,8 +65,25 @@ public sealed class SkinNodeDataStream : ISkinNodeDataStream
                 nodeNumber++;
                 globalIndex += expectedVerticesCount;
 
-                return s.Vertices.Select(v => new VertexData(v, v.normalized, Vector2.zero, new Vector3Int(s.Index, -1, -1), new Vector3(1f, 0f, 0f)));
+                int parentIndex = s.ParentIndex;
+                int index = s.Index;
+                float ownWeight;
+                float parentWeight;
+                if (parentIndex == -1)
+                {
+                    ownWeight = 1f;
+                    parentWeight = 0f;
+                }
+                else
+                {
+                    ownWeight = 0.5f;
+                    parentWeight = 0.5f;
+                }
+
+                return s.Vertices.Select(v => new VertexData(v, v.normalized, Vector2.zero, new Vector3Int(s.Index, parentIndex, -1), new Vector3(ownWeight, parentWeight, 0f)));
             }).ToArray();
+
+            stream.WriteIndices(endLocalIndices.Select(l => l + globalIndex - expectedVerticesCount * 2).ToArray());
 
             stream.Write(vertexData);
         }
