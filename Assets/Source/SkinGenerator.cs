@@ -57,8 +57,10 @@ public class SkinGenerator : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
+        if (Application.isPlaying) return;
+
         if (rootNode != null)
         {
             var stream = new GizmosDrawSkinStream();

@@ -6,7 +6,9 @@ using UnityEngine;
 public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
 {
     [SerializeField] float nodeWidth = 0.05f;
-    [SerializeField] bool connectWithChildren;
+    [SerializeField] float nodeDepth = 0.05f;
+    [SerializeField] bool nonDrawable;
+    [SerializeField] int siblingIndex;
     int index;
     SkinNodeTemplate[] childTemplates;
     int transformChildren;
@@ -52,56 +54,36 @@ public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
             transformChildren = transform.childCount;
         }
     }
-
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, nodeWidth * 0.5f);
-        foreach (var child in childTemplates)
-        {
-            Gizmos.DrawLine(transform.position, child.transform.position);
-        }
-    }
-
     public void AppendMeshData(ISkinNodeDataStream skinStream)
     {
-        if (connectWithChildren || childTemplates.Length <= 1) GenerateNode(skinStream);
-
-        switch (childTemplates.Length)
+        foreach (var child in childTemplates)
         {
-            case 0:
-                return;
-            case 1:
-                var singleChild = childTemplates[0];
-                singleChild.AppendMeshData(skinStream);
-                break;
-            default:
-                foreach (var child in childTemplates)
-                {
-                    skinStream.PushBuffer();
-                    if (connectWithChildren) GenerateNode(skinStream);
-                    child.AppendMeshData(skinStream);
-                }
-                break;
+            if (!nonDrawable)
+            {
+                Quaternion rotation = transform.rotation;
+                GenerateNode(skinStream, index, transform.position, rotation);
+                child.GenerateNode(skinStream, index, child.transform.position, rotation);
+                skinStream.PushBuffer();
+            }
+
+            child.AppendMeshData(skinStream);
         }
     }
-    void GenerateNode(ISkinNodeDataStream stream)
+    void GenerateNode(ISkinNodeDataStream stream, int ownerIndex, Vector3 position, Quaternion rotation)
     {
         float halfWidth = nodeWidth * 0.5f;
+        float halfDepth = nodeDepth * 0.5f;
 
         Vector3[] localVertices = new Vector3[]
         {
-            new Vector3(-halfWidth, 0f, -halfWidth),
-            new Vector3(-halfWidth, 0f, halfWidth),
-            new Vector3(halfWidth, 0f, halfWidth),
-            new Vector3(halfWidth, 0f, -halfWidth),
+            new Vector3(-halfWidth, 0f, -halfDepth),
+            new Vector3(-halfWidth, 0f, halfDepth),
+            new Vector3(halfWidth, 0f, halfDepth),
+            new Vector3(halfWidth, 0f, -halfDepth),
         };
-
-        stream.Write(new SkinNodeData(index, ParentIndex, localVertices.Select(l => Matrix.MultiplyPoint3x4(l)).ToArray()));
+        stream.Write(new SkinNodeData(ownerIndex, localVertices.Select(l => Matrix4x4.TRS(position, rotation, Vector3.one).MultiplyPoint3x4(l)).ToArray()));
     }
 
     public Matrix4x4 Matrix => transform.localToWorldMatrix;
     public int Index => index;
-
-    public int ParentIndex => parent == null ? -1 : parent.index;
 }

@@ -65,22 +65,7 @@ public sealed class SkinNodeDataStream : ISkinNodeDataStream
                 nodeNumber++;
                 globalIndex += expectedVerticesCount;
 
-                int parentIndex = s.ParentIndex;
-                int index = s.Index;
-                float ownWeight;
-                float parentWeight;
-                if (parentIndex == -1)
-                {
-                    ownWeight = 1f;
-                    parentWeight = 0f;
-                }
-                else
-                {
-                    ownWeight = 0.5f;
-                    parentWeight = 0.5f;
-                }
-
-                return s.Vertices.Select(v => new VertexData(v, v.normalized, Vector2.zero, new Vector3Int(s.Index, parentIndex, -1), new Vector3(ownWeight, parentWeight, 0f)));
+                return s.Vertices.Select(v => new VertexData(v, v.normalized, Vector2.zero, new Vector3Int(s.Index, -1, -1), new Vector3(1f, 0f, 0f)));
             }).ToArray();
 
             stream.WriteIndices(endLocalIndices.Select(l => l + globalIndex - expectedVerticesCount * 2).ToArray());
