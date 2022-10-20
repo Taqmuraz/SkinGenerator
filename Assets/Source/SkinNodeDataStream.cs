@@ -33,11 +33,15 @@ public sealed class SkinNodeDataStream : ISkinNodeDataStream
             6, 5, 1
         };
         int expectedVerticesCount = 4;
+        int globalIndex = 0;
 
         foreach (var subSkin in buffers)
         {
+            if (subSkin.Count == 0) continue;
+
+            stream.PushIndexBuffer();
+
             int nodeNumber = 0;
-            int globalIndex = 0;
 
             var vertexData = subSkin.SelectMany(s =>
             {
@@ -52,8 +56,8 @@ public sealed class SkinNodeDataStream : ISkinNodeDataStream
 
                 return s.Vertices.Select(v => new VertexData(v, v.normalized, Vector2.zero, new Vector3Int(s.Index, -1, -1), new Vector3(1f, 0f, 0f)));
             }).ToArray();
+
             stream.Write(vertexData);
-            stream.PushIndexBuffer();
         }
         stream.PushJoints(joints);
     }

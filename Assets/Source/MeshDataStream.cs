@@ -5,10 +5,7 @@ using UnityEngine;
 public sealed class MeshDataStream : IMeshDataStream
 {
     List<VertexData> buffer = new List<VertexData>();
-    List<List<int>> indices = new List<List<int>>()
-    {
-        new List<int>()
-    };
+    List<List<int>> indices = new List<List<int>>();
     List<ISkinJoint> joints = new List<ISkinJoint>();
 
     public Mesh BuildMesh()
