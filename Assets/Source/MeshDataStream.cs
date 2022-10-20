@@ -5,7 +5,7 @@ using UnityEngine;
 public sealed class MeshDataStream : IMeshDataStream
 {
     List<VertexData> buffer = new List<VertexData>();
-    List<List<int>> indices = new List<List<int>>();
+    List<int> indices = new List<int>();
     List<ISkinJoint> joints = new List<ISkinJoint>();
 
     public Mesh BuildMesh()
@@ -20,21 +20,8 @@ public sealed class MeshDataStream : IMeshDataStream
         mesh.uv = uvs;
         mesh.name = "GeneratedMesh";
 
-        mesh.subMeshCount = indices.Count;
-
-        for (int i = 0; i < indices.Count; i++)
-        {
-            mesh.SetTriangles(indices[i].ToArray(), i);
-        }
-        var resultMesh = new Mesh();
-        resultMesh.CombineMeshes(Enumerable.Range(0, mesh.subMeshCount).Select(i => new CombineInstance()
-        {
-            mesh = mesh,
-            transform = Matrix4x4.identity,
-            subMeshIndex = i,
-        }).ToArray(), true);
-
-        mesh = resultMesh;
+        mesh.subMeshCount = 1;
+        mesh.SetTriangles(indices.ToArray(), 0);
 
         mesh.bindposes = this.joints.Select(j => Matrix4x4.Inverse(j.Matrix)).ToArray();
         mesh.boneWeights = Enumerable.Range(0, buffer.Count).Select(i =>
@@ -75,12 +62,11 @@ public sealed class MeshDataStream : IMeshDataStream
 
     public void WriteIndices(int[] indices)
     {
-        this.indices[this.indices.Count - 1].AddRange(indices);
+        this.indices.AddRange(indices);
     }
 
     public void PushIndexBuffer(out int lastIndex)
     {
         lastIndex = buffer.Count;
-        indices.Add(new List<int>());
     }
 }
