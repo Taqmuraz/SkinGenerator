@@ -464,7 +464,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nodeWidth: 0.2
-  connectWithChildren: 0
+  connectWithChildren: 1
 --- !u!1 &572482377
 GameObject:
   m_ObjectHideFlags: 0

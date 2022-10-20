@@ -87,8 +87,6 @@ public sealed class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
     }
     void GenerateNode(ISkinNodeDataStream stream)
     {
-        if (stream is SkinNodeDataStream) Debug.Log(name);
-
         float halfWidth = nodeWidth * 0.5f;
 
         Vector3[] localVertices = new Vector3[]
