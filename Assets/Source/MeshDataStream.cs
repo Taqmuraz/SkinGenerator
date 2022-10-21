@@ -5,7 +5,9 @@ using UnityEngine;
 public sealed class MeshDataStream : IMeshDataStream
 {
     List<VertexData> buffer = new List<VertexData>();
-    List<int> indices = new List<int>();
+    Dictionary<int, List<int>> indices = new Dictionary<int, List<int>>();
+    int lastIndex;
+    int currentSubmesh;
     List<ISkinJoint> joints = new List<ISkinJoint>();
 
     public Mesh BuildMesh()
@@ -20,8 +22,11 @@ public sealed class MeshDataStream : IMeshDataStream
         mesh.uv = uvs;
         mesh.name = "GeneratedMesh";
 
-        mesh.subMeshCount = 1;
-        mesh.SetTriangles(indices.ToArray(), 0);
+        mesh.subMeshCount = indices.Count;
+        for (int i = 0; i < indices.Count; i++)
+        {
+            mesh.SetTriangles(indices[i].ToArray(), i);
+        }
 
         mesh.bindposes = this.joints.Select(j => Matrix4x4.Inverse(j.Matrix)).ToArray();
         mesh.boneWeights = Enumerable.Range(0, buffer.Count).Select(i =>
@@ -62,11 +67,13 @@ public sealed class MeshDataStream : IMeshDataStream
 
     public void WriteIndices(int[] indices)
     {
-        this.indices.AddRange(indices);
+        this.indices[currentSubmesh].AddRange(indices.Select(i => i + lastIndex));
     }
 
-    public void PushIndexBuffer(out int lastIndex)
+    public void PushIndexBuffer(int submeshIndex)
     {
+        if (!indices.ContainsKey(submeshIndex)) indices.Add(submeshIndex, new List<int>());
+        currentSubmesh = submeshIndex;
         lastIndex = buffer.Count;
     }
 }

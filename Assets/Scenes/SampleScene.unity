@@ -123,6 +123,56 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &128815672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 128815673}
+  - component: {fileID: 128815674}
+  m_Layer: 0
+  m_Name: WingArmLeftB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &128815673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128815672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380533386}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &128815674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128815672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b44d492bce327f45b6fe8af92de1231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialIndex: 1
+  thickness: 0.01
+  startA: {fileID: 2075336561}
+  startB: {fileID: 136620827}
+  endA: {fileID: 1086345775}
+  endB: {fileID: 214363237}
 --- !u!1 &136620825
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.03
   nodeDepth: 0.06
   differentEnd: 1
@@ -218,6 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.25
   nodeDepth: 0.15
   differentEnd: 1
@@ -268,6 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.07
   nodeDepth: 0.07
   differentEnd: 1
@@ -317,6 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5f659ca28fc2be4bac1ce0fe1d82733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   size: {x: 0.03, y: 0.03, z: 0.03}
   rotation: {x: 0, y: 180, z: 0}
   offset: {x: 0, y: -0.04, z: 0}
@@ -365,11 +419,162 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.05
   nodeDepth: 0.07
   differentEnd: 1
   endWidth: 0.04
   endDepth: 0.05
+--- !u!1 &417033389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417033390}
+  - component: {fileID: 417033391}
+  m_Layer: 0
+  m_Name: WingLegsB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417033390
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417033389}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380533386}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &417033391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417033389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b44d492bce327f45b6fe8af92de1231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialIndex: 1
+  thickness: 0.01
+  startA: {fileID: 235249267}
+  startB: {fileID: 1359992507}
+  endA: {fileID: 2001333541}
+  endB: {fileID: 1490829985}
+--- !u!1 &517160531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 517160532}
+  - component: {fileID: 517160533}
+  m_Layer: 0
+  m_Name: WingArmRightB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &517160532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517160531}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380533386}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &517160533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 517160531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b44d492bce327f45b6fe8af92de1231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialIndex: 1
+  thickness: 0.01
+  startA: {fileID: 967399861}
+  startB: {fileID: 1698286632}
+  endA: {fileID: 1086345775}
+  endB: {fileID: 214363237}
+--- !u!1 &528349367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 528349368}
+  - component: {fileID: 528349369}
+  m_Layer: 0
+  m_Name: WingArmLeftA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &528349368
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528349367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380533386}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &528349369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528349367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b44d492bce327f45b6fe8af92de1231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialIndex: 1
+  thickness: 0.01
+  startA: {fileID: 363539500}
+  startB: {fileID: 2075336561}
+  endA: {fileID: 836290099}
+  endB: {fileID: 1086345775}
 --- !u!1 &572482377
 GameObject:
   m_ObjectHideFlags: 0
@@ -381,7 +586,7 @@ GameObject:
   - component: {fileID: 572482378}
   - component: {fileID: 572482379}
   m_Layer: 0
-  m_Name: SkinBuilder
+  m_Name: HumanWingsuit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -399,6 +604,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1918797057}
   - {fileID: 1380533386}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -416,9 +622,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rootNode: {fileID: 1380533387}
-  targetObject: {fileID: 572482377}
-  material: {fileID: 2100000, guid: b8c56977b566e664f90e4fdea738b07c, type: 2}
+  targetObject: {fileID: 1918797056}
+  materials:
+  - {fileID: 2100000, guid: b8c56977b566e664f90e4fdea738b07c, type: 2}
+  - {fileID: 2100000, guid: 3eab58c0af1b84c41853ac7b1edd9843, type: 2}
   generateOnStart: 1
+  writeOnStart: 1
+--- !u!1 &573236874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 573236875}
+  - component: {fileID: 573236876}
+  m_Layer: 0
+  m_Name: WingLegsA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &573236875
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573236874}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380533386}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &573236876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 573236874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b44d492bce327f45b6fe8af92de1231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialIndex: 1
+  thickness: 0.01
+  startA: {fileID: 1611707842}
+  startB: {fileID: 235249267}
+  endA: {fileID: 1487147699}
+  endB: {fileID: 2001333541}
 --- !u!1 &593793972
 GameObject:
   m_ObjectHideFlags: 0
@@ -463,6 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e97657213473d49b83b6a738a25f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
 --- !u!1 &594241864
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,6 +768,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.1
   nodeDepth: 0.08
   differentEnd: 1
@@ -557,6 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.05
   nodeDepth: 0.1
   differentEnd: 0
@@ -701,6 +963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.05
   nodeDepth: 0.05
   differentEnd: 1
@@ -750,6 +1013,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e97657213473d49b83b6a738a25f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
 --- !u!1 &836290097
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +1061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e97657213473d49b83b6a738a25f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,6 +1191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.04
   nodeDepth: 0.05
   differentEnd: 1
@@ -976,6 +1242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.15
   nodeDepth: 0.15
   differentEnd: 1
@@ -1025,6 +1292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.05
   nodeDepth: 0.1
   differentEnd: 0
@@ -1075,6 +1343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.06
   nodeDepth: 0.06
   differentEnd: 0
@@ -1112,8 +1381,14 @@ Transform:
   - {fileID: 214363236}
   - {fileID: 1487147698}
   - {fileID: 1611707841}
+  - {fileID: 573236875}
+  - {fileID: 417033390}
+  - {fileID: 528349368}
+  - {fileID: 128815673}
+  - {fileID: 1541157631}
+  - {fileID: 517160532}
   m_Father: {fileID: 572482378}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1380533387
 MonoBehaviour:
@@ -1127,6 +1402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e97657213473d49b83b6a738a25f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
 --- !u!1 &1487147697
 GameObject:
   m_ObjectHideFlags: 0
@@ -1172,6 +1448,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.1
   nodeDepth: 0.1
   differentEnd: 1
@@ -1222,11 +1499,62 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.06
   nodeDepth: 0.06
   differentEnd: 0
   endWidth: 0.05
   endDepth: 0.05
+--- !u!1 &1541157630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1541157631}
+  - component: {fileID: 1541157632}
+  m_Layer: 0
+  m_Name: WingArmRightA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1541157631
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541157630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1380533386}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1541157632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541157630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b44d492bce327f45b6fe8af92de1231, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  materialIndex: 1
+  thickness: 0.01
+  startA: {fileID: 1726022395}
+  startB: {fileID: 967399861}
+  endA: {fileID: 836290099}
+  endB: {fileID: 1086345775}
 --- !u!1 &1611707840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.1
   nodeDepth: 0.1
   differentEnd: 1
@@ -1322,6 +1651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.03
   nodeDepth: 0.06
   differentEnd: 1
@@ -1372,11 +1702,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.05
   nodeDepth: 0.07
   differentEnd: 1
   endWidth: 0.04
   endDepth: 0.05
+--- !u!1 &1918797056
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1918797057}
+  m_Layer: 0
+  m_Name: HumanWingsuitMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1918797057
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918797056}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 572482378}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2001333539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.07
   nodeDepth: 0.07
   differentEnd: 1
@@ -1472,6 +1835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.04
   nodeDepth: 0.05
   differentEnd: 1
@@ -1522,6 +1886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d97bdb8fefa7e1d438b6c2a6312e129d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  materialIndex: 0
   nodeWidth: 0.05
   nodeDepth: 0.05
   differentEnd: 1

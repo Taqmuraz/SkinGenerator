@@ -21,7 +21,7 @@ public sealed class SkinNodeFrustumGenerator : ISkinNodeGenerator
             Vector3 position = joint.Matrix.GetPosition();
             Vector3 endPosition = child.Matrix.GetPosition();
 
-            meshDataStream.PushIndexBuffer(out int startIndex);
+            meshDataStream.PushIndexBuffer(joint.MaterialIndex);
 
             int[] localIndices =
             {
@@ -45,20 +45,11 @@ public sealed class SkinNodeFrustumGenerator : ISkinNodeGenerator
                 5, 6, 7
             };
 
-            MoveIndices(beginLocalIndices, startIndex);
-            MoveIndices(localIndices, startIndex);
-            MoveIndices(endLocalIndices, startIndex);
-
             meshDataStream.WriteVertexData(CreateVertices(position, rotation, startSize));
             meshDataStream.WriteVertexData(CreateVertices(endPosition, rotation, endSize));
             meshDataStream.WriteIndices(beginLocalIndices);
             meshDataStream.WriteIndices(localIndices);
             meshDataStream.WriteIndices(endLocalIndices);
-        }
-
-        void MoveIndices(int[] local, int offset)
-        {
-            for (int i = 0; i < local.Length; i++) local[i] += offset;
         }
 
         VertexData[] CreateVertices(Vector3 position, Quaternion rotation, Vector2 size)

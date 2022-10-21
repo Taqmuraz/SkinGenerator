@@ -5,11 +5,13 @@ using UnityEngine;
 [ExecuteInEditMode]
 public abstract class SkinNodeTemplate : MonoBehaviour, ISkinNode, ISkinJoint
 {
+    [SerializeField] int materialIndex;
     int index;
     SkinNodeTemplate[] childTemplates;
     int transformChildren;
     SkinNodeTemplate parent;
     public IEnumerable<ISkinJoint> Children => childTemplates;
+    public int MaterialIndex => materialIndex;
 
     public void TraceIndices(List<SkinNodeTemplate> jointsList, SkinNodeTemplate parent)
     {

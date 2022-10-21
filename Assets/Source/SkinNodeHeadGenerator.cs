@@ -16,7 +16,7 @@ public sealed class SkinNodeHeadGenerator : ISkinNodeGenerator
 
     public void Generate(IMeshDataStream meshDataStream, ISkinJoint joint)
     {
-        meshDataStream.PushIndexBuffer(out int startIndex);
+        meshDataStream.PushIndexBuffer(joint.MaterialIndex);
 
         Vector3[] vertices =
         {
@@ -64,7 +64,6 @@ public sealed class SkinNodeHeadGenerator : ISkinNodeGenerator
             9,8,0,
             0,1,9
         };
-        for (int i = 0; i < indices.Length; i++) indices[i] += startIndex;
         var data = vertices.Select(v => new VertexData(joint.Matrix.MultiplyPoint3x4(rotation * (offset + new Vector3(v.x * size.x, v.y * size.y, v.z * size.z))), Vector3.zero, Vector2.zero, new Vector3Int(joint.Index, -1, -1), new Vector3(1f, 0f, 0f))).ToArray();
         meshDataStream.WriteVertexData(data);
         meshDataStream.WriteIndices(indices);
