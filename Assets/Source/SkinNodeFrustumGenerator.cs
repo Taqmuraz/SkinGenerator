@@ -45,14 +45,14 @@ public sealed class SkinNodeFrustumGenerator : ISkinNodeGenerator
                 5, 6, 7
             };
 
-            meshDataStream.WriteVertexData(CreateVertices(position, rotation, startSize));
-            meshDataStream.WriteVertexData(CreateVertices(endPosition, rotation, endSize));
+            meshDataStream.WriteVertexData(CreateVertices(position, rotation, startSize, Vector2.zero));
+            meshDataStream.WriteVertexData(CreateVertices(endPosition, rotation, endSize, Vector2.up));
             meshDataStream.WriteIndices(beginLocalIndices);
             meshDataStream.WriteIndices(localIndices);
             meshDataStream.WriteIndices(endLocalIndices);
         }
 
-        VertexData[] CreateVertices(Vector3 position, Quaternion rotation, Vector2 size)
+        VertexData[] CreateVertices(Vector3 position, Quaternion rotation, Vector2 size, Vector2 uvOffset)
         {
             float halfWidth = size.x * 0.5f;
             float halfDepth = size.y * 0.5f;
@@ -64,9 +64,15 @@ public sealed class SkinNodeFrustumGenerator : ISkinNodeGenerator
                 new Vector3(halfWidth, 0f, halfDepth),
                 new Vector3(halfWidth, 0f, -halfDepth),
             };
-
-            return localVertices.Select(l => Matrix4x4.TRS(position, rotation, Vector3.one).MultiplyPoint3x4(l))
-                .Select(v => new VertexData(v, Vector3.zero, Vector2.zero, new Vector3Int(joint.Index, -1, -1), new Vector3(1f, 0f, 0f))).ToArray();
+            Vector2[] uvs = new Vector2[]
+            {
+                new Vector2(0, 0),
+                new Vector2(1, 0),
+                new Vector2(2f/3f, 0),
+                new Vector2(1f/3f, 0),
+            };
+            return Enumerable.Range(0, localVertices.Length)
+                .Select(i => new VertexData(Matrix4x4.TRS(position, rotation, Vector3.one).MultiplyPoint3x4(localVertices[i]), Vector3.zero, uvs[i] + uvOffset, new Vector3Int(joint.Index, -1, -1), new Vector3(1f, 0f, 0f))).ToArray();
         }
     }
 }

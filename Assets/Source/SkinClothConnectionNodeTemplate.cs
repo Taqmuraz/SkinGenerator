@@ -3,7 +3,8 @@ using UnityEngine;
 
 public sealed class SkinClothConnectionNodeTemplate : SkinNodeTemplate
 {
-    [SerializeField] float thickness = 0.1f;
+    [SerializeField] float thicknessA = 0.1f;
+    [SerializeField] float thicknessB = 0.1f;
     [SerializeField] SkinNodeTemplate startA;
     [SerializeField] SkinNodeTemplate startB;
     [SerializeField] SkinNodeTemplate endA;
@@ -11,6 +12,6 @@ public sealed class SkinClothConnectionNodeTemplate : SkinNodeTemplate
 
     protected override ISkinNodeGenerator CreateGenerator()
     {
-        return new SkinClothConnectionNodeGenerator(MaterialIndex, thickness, startA, startB, endA, endB);
+        return new SkinClothConnectionNodeGenerator(MaterialIndex, thicknessA, thicknessB, startA, startB, endA, endB);
     }
 }
